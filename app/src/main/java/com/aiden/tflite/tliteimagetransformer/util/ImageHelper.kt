@@ -53,6 +53,26 @@ object ImageHelper {
         return matrix
     }
 
+    fun createCenterCropBitmap(bitmap: Bitmap): Bitmap {
+        return if (bitmap.width >= bitmap.height) {
+            Bitmap.createBitmap(
+                bitmap,
+                bitmap.width / 2 - bitmap.height / 2,
+                0,
+                bitmap.height,
+                bitmap.height
+            )
+        } else {
+            Bitmap.createBitmap(
+                bitmap,
+                0,
+                bitmap.height / 2 - bitmap.width / 2,
+                bitmap.width,
+                bitmap.width
+            )
+        }
+    }
+
     fun createEmptyBitmap(imageWidth: Int, imageHeight: Int, color: Int = 0): Bitmap {
         val ret = Bitmap.createBitmap(imageWidth, imageHeight, Bitmap.Config.RGB_565)
         if (color != 0) {

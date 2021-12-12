@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.aiden.tflite.tliteimagetransformer.databinding.ActivityMainBinding
+import com.aiden.tflite.tliteimagetransformer.util.ImageHelper
 import java.io.IOException
 import java.util.*
 
@@ -32,9 +33,9 @@ class MainActivity : AppCompatActivity() {
         } catch (exception: IOException) {
             Toast.makeText(this, "Can not load image!!", Toast.LENGTH_SHORT).show()
         }
-
         bitmap?.let {
-            transferViewModel.setOriginalImageBitmap(bitmap)
+            val centerCropBitmap = ImageHelper.createCenterCropBitmap(it)
+            transferViewModel.setOriginalImageBitmap(centerCropBitmap)
         }
     }
 
